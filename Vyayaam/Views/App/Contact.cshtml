@@ -1,0 +1,34 @@
+﻿@model Vyayaam.ViewModels.ContactViewModel
+@{
+    @ViewBag.Title
+}
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <label asp-for="Name">Your Name:</label>
+    <br />
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <br />
+    <label asp-for="Email">Email:</label>
+    <br />
+    <input asp-for="Email" type="email" />
+    <span asp-validation-for="Email"></span>
+    <br />
+    <label asp-for="Subject">Subject:</label>
+    <br />
+    <input asp-for="Subject" type="text" />
+    <span asp-validation-for="Subject"></span>
+    <br />
+    <label asp-for="Message">Message:</label>
+    <br />
+    <textarea asp-for="Message" rows="4"></textarea>
+    <span asp-validation-for="Message"></span>
+    <br />
+    <label>Your Name:</label>
+    <br />
+    <input type="submit" value="Send Message" class="btn btn-success"/>
+</form>

@@ -1,0 +1,26 @@
+﻿/*header{
+    background-color: grey;
+}*/
+
+/*body{
+    background-color:powderblue;
+}
+
+.details{
+    font-size:small;
+}*/
+img{
+   max-height:150px;
+   max-width:150px;
+}
+
+/*menu>ul>li{
+    display:inline;
+}
+
+menu li::after{
+    content: ' | ';
+}
+menu li:last-of-type::after{
+    content: '';
+}*/

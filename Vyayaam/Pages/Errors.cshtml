@@ -1,0 +1,12 @@
+﻿@page
+@*@model Vyayaam.Pages.ErrorsModel*@
+@{
+    ViewData["Title"] = "Errors";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Errors</h2>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

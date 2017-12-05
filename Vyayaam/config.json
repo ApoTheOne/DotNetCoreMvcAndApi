@@ -1,0 +1,11 @@
+﻿{
+  "ConnectionStrings": {
+    "VyayaamConnectionString": "Server=SURABHI\\SQLEXPRESS;Database=Vyayaam;Integrated Security=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Vyayaam": "Information", //default or the name starting from eg: here its vyayaam.ILogger<VyayaamRepository>
+      "Microsoft": "Warning"
+    }
+  }
+}

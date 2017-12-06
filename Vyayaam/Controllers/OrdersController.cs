@@ -29,7 +29,7 @@ namespace Vyayaam.Controllers
         {
             try
             {
-                return Ok(repository.GetAllOrders());
+                return Ok(mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(repository.GetAllOrders()));
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace Vyayaam.Controllers
             {
                 var order = repository.GetOrderById(id);
                 if (order != null)
-                    return Ok(order);
+                    return Ok(mapper.Map<Order, OrderViewModel>(order));
                 else
                     return NotFound();
             }
@@ -63,12 +63,7 @@ namespace Vyayaam.Controllers
             {
                 if(ModelState.IsValid)
                 {
-                    var newOrder = new Order()
-                    {
-                        OrderDate = order.OrderDate,
-                        OrderNumber = order.OrderNumber,
-                        Id = order.OrderId
-                    };
+                    var newOrder = mapper.Map<OrderViewModel, Order>(order);
 
                     if(newOrder.OrderDate == DateTime.MinValue)
                     {
@@ -78,12 +73,7 @@ namespace Vyayaam.Controllers
                     repository.AddEntity(newOrder);
                     if (repository.SaveAll())
                     {
-                        var vm = new OrderViewModel()
-                        {
-                            OrderDate = newOrder.OrderDate,
-                            OrderId = newOrder.Id,
-                            OrderNumber = newOrder.OrderNumber
-                        };
+                        var vm = mapper.Map<Order, OrderViewModel>(newOrder);
                         return Created($"/api/order/{vm.OrderId}", vm);
                     }
                 }
@@ -96,7 +86,7 @@ namespace Vyayaam.Controllers
             catch (Exception ex)
             {
                 logger.LogError($"Failed to save new order, {ex}");
-                return BadRequest($"Failed to save new order, {ex}");
+                return BadRequest($"Failed to save new order");
             }
             return BadRequest("Failed to save new order");
         }

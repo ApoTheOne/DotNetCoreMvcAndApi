@@ -13,5 +13,7 @@ namespace Vyayaam.ViewModels
         [Required]
         [MinLength(5)]
         public string OrderNumber { get; set; }
+
+        public ICollection<OrderItemViewModel> Items { get; set; }
     }
 }

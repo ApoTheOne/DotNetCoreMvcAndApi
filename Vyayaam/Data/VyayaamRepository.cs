@@ -42,12 +42,20 @@ namespace Vyayaam.Data
                 .ToList();
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
-            return context.Orders
-                .Include(o => o.Items)
-                .ThenInclude(i => i.Product)
-                .ToList();
+            if (includeItems)
+            {
+                return context.Orders
+                    .Include(o => o.Items)
+                    .ThenInclude(i => i.Product)
+                    .ToList();
+            }
+            else
+            {
+                return context.Orders
+                    .ToList();
+            }
         }
 
         public Order GetOrderById(int id)

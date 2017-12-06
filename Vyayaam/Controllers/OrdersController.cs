@@ -25,11 +25,12 @@ namespace Vyayaam.Controllers
             this.mapper = mapper;
         }
 
-        public IActionResult Get()
+        public IActionResult Get(bool includeItems = true)
         {
             try
             {
-                return Ok(mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(repository.GetAllOrders()));
+                var results = repository.GetAllOrders(includeItems);
+                return Ok(mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(results));
             }
             catch (Exception ex)
             {

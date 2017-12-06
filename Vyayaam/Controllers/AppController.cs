@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,7 @@ namespace Vyayaam.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Shop()
         {
             //var results = from p in _context.Products

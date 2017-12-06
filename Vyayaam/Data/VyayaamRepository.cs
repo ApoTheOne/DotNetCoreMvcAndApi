@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +42,34 @@ namespace Vyayaam.Data
                 .ToList();
         }
 
+        public IEnumerable<Order> GetAllOrders()
+        {
+            return context.Orders
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .ToList();
+        }
+
+        public Order GetOrderById(int id)
+        {
+            //return context.Orders.Find(id);
+            //Or
+            return context.Orders
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+        }
+
         public bool SaveAll()
         {
             return context.SaveChanges() > 0;
-            /* context.SaveChanges() => returns number of saved rows */
+            /*Note: context.SaveChanges() => returns number of saved rows */
+        }
+
+        public void AddEntity(object entity)
+        {
+            context.Add(entity);
         }
     }
 }

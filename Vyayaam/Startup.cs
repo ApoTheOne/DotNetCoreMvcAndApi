@@ -10,6 +10,8 @@ using Vyayaam.Services;
 using Vyayaam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using AutoMapper;
 
 namespace Vyayaam
 {
@@ -35,6 +37,9 @@ namespace Vyayaam
             {
                 config.UseSqlServer(_config.GetConnectionString("VyayaamConnectionString"));
             });
+
+            services.AddAutoMapper();
+
             services.AddTransient<IMailService, NullMailService>();
             /*inject real messaging/mail services here
              services.AddTransient<IMailService, EMailService>();
@@ -44,7 +49,7 @@ namespace Vyayaam
             services.AddScoped<IVyayaamRepository, VyayaamRepository>();
 
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
